@@ -1,0 +1,13 @@
+---
+sudo: false
+
+language: python
+
+services: docker
+
+install:
+  - pip install ansible==2.7.7
+  - pip install testinfra molecule docker
+
+script:
+  - molecule test

@@ -1,0 +1,9 @@
+---
+java_home_directory: "/usr/java/latest"
+oracle_java_jce_home_directory: "{{ java_home_directory }}/jre/lib/security"
+oracle_java_jce_download_dir: "/tmp"
+oracle_java_jce_version: 8
+
+# Download properties
+oracle_java_jce_download_link: "{{ lookup('ini', 'oracle_java_jce_download_link section={{ oracle_java_jce_version }} type=ini file=jce.ini') }}"
+oracle_java_jce_download_checksum: "{{ lookup('ini', 'oracle_java_jce_download_checksum section={{ oracle_java_jce_version }} type=ini file=jce.ini') }}"

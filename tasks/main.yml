@@ -1,0 +1,37 @@
+---
+- name: Install unzip
+  package:
+    name: unzip
+    state: present
+
+- name: Download Oracle Java {{ oracle_java_jce_version }} JCE from {{ oracle_java_jce_download_link }} to {{ oracle_java_jce_download_dir }}
+  get_url:
+    url: "{{ oracle_java_jce_download_link }}"
+    dest: "{{ oracle_java_jce_download_dir }}/jce_policy-{{ oracle_java_jce_version }}.zip"
+    validate_certs: no
+    headers:
+      Cookie: oraclelicense=accept-securebackup-cookie
+
+- name: Create {{ oracle_java_jce_home_directory }}
+  file:
+    path: "{{ oracle_java_jce_home_directory }}"
+    state: directory
+
+- name: Check if Oracle Java {{ oracle_java_jce_version }} JCE is installed 1/2
+  stat:
+    path: "{{ oracle_java_jce_home_directory }}/US_export_policy.jar"
+  register: oracle_java_jce_export_policy
+
+- name: Check if Oracle Java {{ oracle_java_jce_version }} JCE is installed 2/2
+  stat:
+    path: "{{ oracle_java_jce_home_directory }}/local_policy.jar"
+  register: oracle_java_jce_local_policy
+
+- name: Install Oracle Java {{ oracle_java_jce_version }} JCE to {{ oracle_java_jce_home_directory }}
+  unarchive:
+    src: "{{ oracle_java_jce_download_dir }}/jce_policy-{{ oracle_java_jce_version }}.zip"
+    dest: "{{ oracle_java_jce_home_directory }}"
+    extra_opts:
+      - -j
+    remote_src: yes
+  when: not oracle_java_jce_export_policy.stat.exists or not oracle_java_jce_local_policy.stat.exists
