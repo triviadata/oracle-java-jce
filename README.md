@@ -1,6 +1,8 @@
 Oracle Java JCE
 =========
 
+[![Build Status](https://travis-ci.com/triviadata/oracle-java-jce.svg?branch=master)](https://travis-ci.com/triviadata/oracle-java-jce)
+
 Install Oracle Java JCE into existing `JAVA_HOME` on Linux host.
 
 Requirements
