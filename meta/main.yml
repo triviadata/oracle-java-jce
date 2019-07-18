@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: matus-cuper
-  role_name: triviadata.oracle-java-jce
+  role_name: oracle-java-jce
   description: Ansible role installing Oracle JAVA JCE for Linux
   company: trivia data, s.r.o.
 
