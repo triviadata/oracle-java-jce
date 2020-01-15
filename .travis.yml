@@ -3,14 +3,17 @@ sudo: false
 
 language: python
 
-python: 2.7
+python: 3.8
 
 services: docker
 
 install:
-  - pip install ansible==2.7.7
-  - pip install testinfra molecule docker
-  - git clone --depth=50 --branch=master https://github.com/${TRAVIS_REPO_SLUG}.git triviadata.oracle-java-jce
+  - pip3 install ansible
+  - pip3 install testinfra molecule docker
+
+before_script:
+  - cd ../
+  - mv ansible-oracle-java-jce triviadata.oracle-java-jce
   - cd triviadata.oracle-java-jce
 
 script:
